@@ -7,3 +7,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./pwa-app:/pwa-app
+    nginx:
+        image: nginx:1.13.6
+        ports:
+            - 80:80
