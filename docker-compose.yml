@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+    app-build:
+        build: 
+            context: ./app-build
+            dockerfile: Dockerfile
+        volumes:
+            - ./pwa-app:/pwa-app
