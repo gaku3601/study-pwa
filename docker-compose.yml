@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+    https-portal:
+        image: steveltn/https-portal:latest
+        ports:
+            - 80:80
+            - 443:443
+        links:
+            - nginx
+        restart: always
+        environment:
+            DOMAINS: 'test.gakusmemo.com -> http://nginx'
+            STAGE: 'production'
+            FORCE_RENEW: 'true'
     app-build:
         build: 
             context: ./app-build
@@ -8,6 +20,6 @@ services:
         volumes:
             - ./pwa-app:/pwa-app
     nginx:
-        image: nginx:1.13.6
-        ports:
-            - 80:80
+        image: nginx:1.13.7
+        volumes:
+            - ./pwa-app/dist:/usr/share/nginx/html
